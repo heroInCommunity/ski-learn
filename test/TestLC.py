@@ -6,6 +6,7 @@ from sklearn.cross_validation import train_test_split
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
 from sklearn.linear_model import SGDClassifier
+from sklearn import metrics
 
 iris = datasets.load_iris()
 X_iris, y_iris = iris.data, iris.target
@@ -71,3 +72,18 @@ for i in [0, 1, 2]:
 
 print(clf.predict(scaler.transform([[4.7, 3.1]])))
 print(clf.decision_function(scaler.transform([[4.7, 3.1]])))
+
+
+y_train_pred = clf.predict(X_train)
+print(metrics.accuracy_score(y_train, y_train_pred))
+
+y_pred = clf.predict(X_test)
+print(metrics.accuracy_score(y_test, y_pred))
+
+
+print(metrics.classification_report(y_test, y_pred, target_names=iris.target_names))
+print(metrics.confusion_matrix(y_test, y_pred))
+
+
+
+
